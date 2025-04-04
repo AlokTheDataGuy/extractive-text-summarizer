@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './App.css';
-// import Navbar from './components/Navbar';
 import FileUpload from './components/FileUpload';
 import SummaryControls from './components/SummaryControls';
 import SummaryResult from './components/SummaryResult';
@@ -72,7 +71,6 @@ function App() {
 
   return (
     <div className="app-container">
-      {/* <Navbar /> */}
       <main className="main-content">
         <div className="container">
           <h1 className="app-title">AI Text Summarizer</h1>
