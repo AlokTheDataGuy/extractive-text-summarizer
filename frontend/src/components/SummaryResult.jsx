@@ -1,8 +1,6 @@
-// components/SummaryResult.jsx
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
 
-export const SummaryResult = ({ summary, onDownload, darkMode }) => {
+const SummaryResult = ({ summary, onDownload }) => {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
@@ -12,70 +10,52 @@ export const SummaryResult = ({ summary, onDownload, darkMode }) => {
   };
 
   return (
-    <motion.div 
-      className="mt-8"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-    >
-      <div className="flex justify-between items-center mb-3">
-        <h2 className={`text-lg font-semibold ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
-          Summary Result
-        </h2>
-        <div className="flex space-x-2">
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={handleCopy}
-            className={`py-1 px-3 rounded-md font-medium flex items-center ${
-              darkMode 
-                ? 'bg-gray-700 hover:bg-gray-600 text-gray-200' 
-                : 'bg-gray-200 hover:bg-gray-300 text-gray-800'
-            }`}
-          >
-            {copied ? (
-              <>
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                </svg>
-                Copied!
-              </>
-            ) : (
-              <>
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
-                </svg>
-                Copy
-              </>
-            )}
-          </motion.button>
+    <div className="summary-result-section">
+      <h2 className="section-title">Summary Result</h2>
+      
+      <div className="result-container">
+        <div className="result-header">
+          <div className="result-stats">
+            <span className="stat">
+              <strong>{summary.split(' ').length}</strong> words
+            </span>
+            <span className="stat">
+              <strong>{summary.split(/[.!?]+/).filter(Boolean).length}</strong> sentences
+            </span>
+          </div>
           
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={onDownload}
-            className={`py-1 px-3 rounded-md text-white font-medium flex items-center ${
-              darkMode ? 'bg-blue-600 hover:bg-blue-700' : 'bg-blue-500 hover:bg-blue-600'
-            }`}
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-            </svg>
-            Download
-          </motion.button>
+          <div className="result-actions">
+            <button 
+              className="action-button copy-button"
+              onClick={handleCopy}
+            >
+              {copied ? 'Copied!' : 'Copy'}
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+            </button>
+            
+            <button 
+              className="action-button download-button"
+              onClick={onDownload}
+            >
+              Download
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
+        
+        <div className="result-content">
+          {summary}
         </div>
       </div>
-      
-      <motion.div 
-        className={`p-4 rounded-lg max-h-96 overflow-y-auto shadow-inner ${
-          darkMode ? 'bg-gray-700 text-gray-200' : 'bg-gray-100 text-gray-800'
-        }`}
-        initial={{ height: 0 }}
-        animate={{ height: 'auto' }}
-        transition={{ duration: 0.3 }}
-      >
-        <p className="whitespace-pre-line leading-relaxed">{summary}</p>
-      </motion.div>
-    </motion.div>
+    </div>
   );
 };
+
+export default SummaryResult;

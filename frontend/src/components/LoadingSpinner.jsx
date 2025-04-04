@@ -1,11 +1,15 @@
-// components/LoadingSpinner.jsx
 import React from 'react';
 
-export const LoadingSpinner = () => {
+const LoadingSpinner = () => {
   return (
-    <div className="flex flex-col items-center">
-      <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-      <p className="mt-4 text-gray-500">Analyzing and summarizing text...</p>
+    <div className="loading-container">
+      <div className="spinner">
+        <div className="spinner-inner"></div>
+      </div>
+      <p className="loading-text">Generating summary...</p>
+      <p className="loading-subtext">This may take a moment as we analyze your text</p>
     </div>
   );
 };
+
+export default LoadingSpinner;
