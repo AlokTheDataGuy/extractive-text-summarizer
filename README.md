@@ -1,7 +1,5 @@
 # BERT Extractive Text Summarizer
 
-![Project Banner](screenshot.png)
-
 A modern web application that uses BERT transformers to generate extractive summaries from text documents. This application provides an intuitive interface for uploading text files and customizing summary parameters.
 
 ## Features
